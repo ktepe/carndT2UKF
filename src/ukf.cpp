@@ -483,21 +483,26 @@ void UKF::PredictRadarMeasurement(VectorXd &z_pred, MatrixXd  &S, MatrixXd &Zsig
 
     double v1 = cos(yaw)*v;
     double v2 = sin(yaw)*v;
+    double rho_dot=(px*v1+py*v2)/rho;
+    double phi=atan2(py, px);
 
-      
-      double phi=0;
+     /* 
+     double phi=0;
       if (fabs(px)<0.0001){
           std::cout<<"error in atan"<<std::endl;
       } else {
           phi=atan2(py, px);
       }
+      
       double rho_dot=0;
      if (rho>0.0001){
          rho_dot=(px*v1+py*v2)/rho;
      }
-     Zsig(0,i)=rho;
-     Zsig(1,i)=phi;
-     Zsig(2,i)=rho_dot;
+     */
+     // measurement model
+    Zsig(0,i) = sqrt(px*px + py*py);                        //r
+    Zsig(1,i) = atan2(py,px);                                 //phi
+    Zsig(2,i) = (px*v1 + py*v2 ) / sqrt(px*px + py*py);   //r_dot
       
       
   }
@@ -532,10 +537,12 @@ void UKF::PredictRadarMeasurement(VectorXd &z_pred, MatrixXd  &S, MatrixXd &Zsig
 	cout<< S<<endl;
 #endif 
 
-  S(0,0)=S(0,0)+std_radr*std_radr;
-  S(1,1)=S(1,1)+std_radphi*std_radphi;
-  S(2,2)=S(2,2)+std_radrd*std_radrd;
-
+//add measurement noise covariance matrix
+  MatrixXd R = MatrixXd(n_z,n_z);
+  R <<    std_radr*std_radr, 0, 0,
+          0, std_radphi*std_radphi, 0,
+          0, 0,std_radrd*std_radrd;
+  S = S + R;
 
 #if ket_debug
   //print result
