@@ -110,10 +110,28 @@ public:
   void GenerateSigmaPoints(MatrixXd &Xsig_out);
   void AugmentedSigmaPoints(MatrixXd &Xsig, MatrixXd  &Xsig_aug);	
 	void SigmaPointPrediction(MatrixXd &Xsig_aug, MatrixXd &Xsig_pred, double delta_t); 
+	//void SigmaPointPrediction(MatrixXd &Xsig_aug, double delta_t); 
 	void PredictMeanAndCovariance(MatrixXd &Xsig_pred);
 	//update
 	void PredictRadarMeasurement(VectorXd &z_pred, MatrixXd  &S, MatrixXd &Zsig);
 	void UpdateState(VectorXd &z, VectorXd &z_pred, MatrixXd &S, MatrixXd &Zsig);
+	//
+	// Lidar (Laser) related variables and funcitons
+	// state transition matrix in Jacobian
+ 	MatrixXd Fj_;
+	//Lidar Process covariance matrix 
+	MatrixXd Qlidar_;
+	
+  // lidar measurement covariance matrix
+  MatrixXd Rlidar_;
+  
+  // measurement matrix
+ 	MatrixXd Hlidar_;
+ 
+
+	void PredictLidar(double delta_t);
+	
+	double PhiNorm(double phi);
 
   
 };

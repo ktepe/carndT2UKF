@@ -5,7 +5,8 @@
 #define My_PI  3.141592653589793238463 
 
 #ifndef ket_debug
-#define ket_debug 1
+#define ket_debug 0
+#define ket_debug_ 1
 #endif
 
 
