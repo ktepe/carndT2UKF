@@ -154,8 +154,19 @@ void UKF::UpdateState(VectorXd &z, VectorXd &z_pred, MatrixXd &S, MatrixXd &Zsig
 Performance of the UKF was measured using RMSE values of x and y positions as well as velocities in x and y directions. Another parameter which is important to observe Normalized Innovation Squared (NIS) values for Lidar and Radar. These two are provided below.
 
 ![alt text](./Doc/NISLidar.jpg) *NIS of Lidar, the values are consistenly below 5.9.*
-![alt text](./Doc/NISradar05_05.jpg) *NIS of radar, the values are consistenly below 7.8, except at for the first few epoch.*
-![alt text](./Doc/NISradar05_10_P.jpg) *NIS of radar, the values are consistenly below 5.9, P initial has changed (P_diagonal=[0.5 0.5 10 10 1], the NIS values in the beginning are relatively more consistent than previous figure.*
+![alt text](./Doc/NISr05_10.jpg) *NIS of radar, the values are consistenly below 7.8, except at for the first few epoch (P_diagonal=[1 1 10 10 1].*
+![alt text](./Doc/NISr05_10_P.jpg) *NIS of radar, the values are consistenly below 5.9, P initial has changed (P_diagonal=[0.5 0.5 10 10 1], the NIS values in the beginning are relatively more consistent than previous figure.*
+
+Process covariance values also plays an important role in the performance of UKF. I changed these to reduce the error as well as get consistent NIS values.
+
+| Table: for standard variances for acceleration and yaw change during the  different parameters |
+| ------------- |:-------------:| -----:|
+| Std_a         | 0.5 	| 0.5 	| 0.5 	| 1.0 	| 1.0 | 2.0 |
+| Std_yawdd     | 0.5 	| 1.0 	| 2.0 	| 0.5 	| 2.0 | 2.0 |
+| RMSE x |  0.0636     |   0.0612 | 0.0628 | 0.0669 | 0.0707 | 0.079 |
+| RMSE y |  0.1083     |   0.1087 | 0.1126 | 0.1027 |  0.1123 | 0.1108 |
+| RMSE Vx |  0.3776   |   0.3823 |  0.4002 | 0.3812 | 0.4083 | 0.4137 |
+| RMSE Vy |  0.2487     |    0.2514 | 0.3129 | 0.2221 | 0.3066 | 0.3009 |
 
 
 
