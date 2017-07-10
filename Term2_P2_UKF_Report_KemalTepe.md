@@ -39,8 +39,8 @@ void UKF::Prediction(double delta_t) {
   Xsig_pred.fill(0.0);
   SigmaPointPrediction(Xsig_aug, Xsig_pred, delta_t); 
 
-	PredictMeanAndCovariance(Xsig_pred); 
-	Xsig_pred_=Xsig_pred;
+  PredictMeanAndCovariance(Xsig_pred); 
+  Xsig_pred_=Xsig_pred;
 }
 ```
 
@@ -55,28 +55,23 @@ void UKF::UpdateLidar(MeasurementPackage meas_package) {
   z(1)=meas_package.raw_measurements_[1];
   x_(3)=PhiNorm(x_(3));
 
-	VectorXd z_pred = Hlidar_ * x_;
+  VectorXd z_pred = Hlidar_ * x_;
 	
-	VectorXd y = z - z_pred;
+  VectorXd y = z - z_pred;
 	
-	MatrixXd Ht = Hlidar_.transpose();
-	MatrixXd S = Hlidar_ * P_ * Ht + Rlidar_;
-	MatrixXd Si = S.inverse();
-	MatrixXd PHt = P_ * Ht;
-	MatrixXd K = PHt * Si;
-
-	//new estimate
-	x_(3)=PhiNorm(x_(3));
-
-	x_ = x_ + (K * y);
-	
-	x_(3)=PhiNorm(x_(3));
-
-	int x_size = x_.size();
-	MatrixXd I = MatrixXd::Identity(x_size, x_size);
-	P_ = (I - K * Hlidar_) * P_;
-	// INS calculation
-	
+  MatrixXd Ht = Hlidar_.transpose();
+  MatrixXd S = Hlidar_ * P_ * Ht + Rlidar_;
+  MatrixXd Si = S.inverse();	
+  MatrixXd PHt = P_ * Ht;
+  MatrixXd K = PHt * Si;
+  //new estimate
+  x_(3)=PhiNorm(x_(3));
+  x_ = x_ + (K * y);
+  x_(3)=PhiNorm(x_(3));
+  int x_size = x_.size();
+  MatrixXd I = MatrixXd::Identity(x_size, x_size);
+  P_ = (I - K * Hlidar_) * P_;
+  // INS calculation
   NISlidar_(NISlidar_counter_++)=y.transpose()*Si*y;
 	
 }
@@ -156,9 +151,15 @@ void UKF::UpdateState(VectorXd &z, VectorXd &z_pred, MatrixXd &S, MatrixXd &Zsig
 ```
 ### 2. Explore parameter dependensies.
 
-Performance of the UKF was measured using RMSE values of x and y positions as well as velocities in x and y directions. Another parameter which is important to observe is Normalized Innovation Squared (NIS) values.
+Performance of the UKF was measured using RMSE values of x and y positions as well as velocities in x and y directions. Another parameter which is important to observe Normalized Innovation Squared (NIS) values for Lidar and Radar. These two are provided below.
 
-![alt text](./Doc/NISLidar.jpg) *NIS of Lidar, the values are consistenly below 5.9*
+![alt text](./Doc/NISLidar.jpg) *NIS of Lidar, the values are consistenly below 5.9.*
+![alt text](./Doc/NISradar05_05.jpg) *NIS of radar, the values are consistenly below 7.8, except at for the first few epoch.*
+![alt text](./Doc/NISradar05_10_P.jpg) *NIS of radar, the values are consistenly below 5.9, P initial has changed (P_diagonal=[0.5 0.5 10 10 1], the NIS values in the beginning are relatively more consistent than previous figure.*
+
+
+
+
 
 
 ### 3. Results and Future Enhancements
