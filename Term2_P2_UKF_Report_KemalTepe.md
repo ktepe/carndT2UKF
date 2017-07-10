@@ -160,7 +160,7 @@ Performance of the UKF was measured using RMSE values of x and y positions as we
 Process covariance values also plays an important role in the performance of UKF. I changed these to reduce the error as well as get consistent NIS values.
 
 *Table: for standard variances for acceleration and yaw change during the  different parameters*
-
+| Parameters | | | | | | | 
 | :------------- |-------------:| -----:|-----:|------:|------:|------:|
 | Std_a         | 0.5 	| 0.5 	| 0.5 	| 1.0 	| 1.0 | 2.0 |
 | Std_yawdd     | 0.5 	| 1.0 	| 2.0 	| 0.5 	| 2.0 | 2.0 |
