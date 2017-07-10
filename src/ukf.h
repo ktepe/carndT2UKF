@@ -5,6 +5,7 @@
 #include "Eigen/Dense"
 #include <vector>
 #include <string>
+#include <iostream>
 #include <fstream>
 
 using Eigen::MatrixXd;
@@ -117,8 +118,6 @@ public:
 	void UpdateState(VectorXd &z, VectorXd &z_pred, MatrixXd &S, MatrixXd &Zsig);
 	//
 	// Lidar (Laser) related variables and funcitons
-	// state transition matrix in Jacobian
- 	MatrixXd Fj_;
 	//Lidar Process covariance matrix 
 	MatrixXd Qlidar_;
 	
@@ -127,13 +126,18 @@ public:
   
   // measurement matrix
  	MatrixXd Hlidar_;
- 
+ 	
+ 	VectorXd NISradar_;
+ 	int NISradar_counter_;
+ 	
+ 	VectorXd NISlidar_;
+ 	int NISlidar_counter_;
 
-	void PredictLidar(double delta_t);
-	
 	double PhiNorm(double phi);
 
-  
+  std::ofstream NISradar_file_;
+  std::ofstream NISlidar_file_;
+
 };
 
 #endif /* UKF_H */
