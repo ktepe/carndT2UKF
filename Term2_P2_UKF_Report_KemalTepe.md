@@ -171,17 +171,24 @@ Process covariance values also plays an important role in the performance of UKF
 | RMSE Vx |  0.3776   |   0.3823 |  0.4002 | 0.3812 | 0.4083 | 0.4137 |
 | RMSE Vy |  0.2487     |    0.2514 | 0.3129 | 0.2221 | 0.3066 | 0.3009 |
 
-
-
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
-
-
+Std_a=1.0, and Std_yawdd=0.5 seem to be a good comprimise among different valuesto use from this table
 
 
 ### 3. Results and Future Enhancements
+
+*. Larger Std_a values yield larger errors in x direction, and larger Std_yawdd values generate larger errors in y direction.
+
+*. Better initialization covariance matrix (P) provides a better error estimates initially. However, the process goes to steady state values even initial P is not that well optimized.
+
+As future enhancement these can be further optimized by investigating large number of samples.
+
+Sensor fusion significantly reduce the estimation errors as evidenced by the following table, where simulation was run only with Lidar, only with Radar and with both.
+
+|RMSE Metric| Only Lidar | Only Radar | Both Lidar and Ridar |
+|----|----|-----|-----|
+|RMSE x | 0.0947 |0.2175 | 0.0707 |
+|RMSE y | 0.0963 | 0.2577 | 0.1023 |
+|RMSE Vx | 0.4631 |0.4143 | 0.3655 |
+|RMSE Vy | 0.2289 |0.3608 | 0.2196 |
 
 
