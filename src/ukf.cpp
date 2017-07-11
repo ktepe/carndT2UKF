@@ -34,14 +34,9 @@ UKF::UKF() {
   std_laspy_ = 0.15;
 
   // Radar measurement noise standard deviation radius in m
-  //double std_radr = 0.3;
-  //radar measurement noise standard deviation radius change in m/s
-  //double std_radrd = 0.1;
-
   std_radr_ = 0.3;
 
   // Radar measurement noise standard deviation angle in rad
-  //double std_radphi = 0.0175;
   std_radphi_ = 0.03;
 
   // Radar measurement noise standard deviation radius change in m/s
@@ -62,8 +57,6 @@ UKF::UKF() {
   use_radar_=true;
   use_laser_=true; 
   //Lidar updates
-  
-  
   Hlidar_=MatrixXd(2,5);
   Rlidar_=MatrixXd(2,2);
   
