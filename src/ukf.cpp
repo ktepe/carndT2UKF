@@ -40,7 +40,7 @@ UKF::UKF() {
   std_radphi_ = 0.03;
 
   // Radar measurement noise standard deviation radius change in m/s
-  std_radrd_ = 0.1;
+  std_radrd_ = 0.3;
 
   /**  TODO:Complete the initialization. See ukf.h for other member properties.
   Hint: one or more values initialized above might be wildly off...  */
