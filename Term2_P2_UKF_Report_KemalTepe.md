@@ -1,4 +1,4 @@
-# **Unscented Kalman Filter Project Starter Code**
+# **Unscented Kalman Filter Project**
 Self-Driving Car Engineer Nanodegree Program
 
 ## Kemal Tepe, ketepe@gmail.com
@@ -154,7 +154,7 @@ void UKF::UpdateState(VectorXd &z, VectorXd &z_pred, MatrixXd &S, MatrixXd &Zsig
 Performance of the UKF was measured using RMSE values of x and y positions as well as velocities in x and y directions. Another parameter which is important to observe Normalized Innovation Squared (NIS) values for Lidar and Radar. These two are provided below.
 
 ![alt text](./Doc/NISLidar.jpg) *NIS of Lidar, the values are consistenly below 5.9.*
-![alt text](./Doc/NISRadar.jpg) *NIS of Radar, the values are consistenly below 7.8.* (P_diagonal=[0.5 0.5 10 10 0.5].*
+![alt text](./Doc/NISRadar.jpg) *NIS of Radar, the values are consistenly below 7.8.* (P_diagonal=[0.5 0.5 10 10 0.5]).*
 
 Process covariance values also plays an important role in the performance of UKF. I changed these to reduce the error as well as get consistent NIS values.
 
