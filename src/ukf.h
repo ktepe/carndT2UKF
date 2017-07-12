@@ -138,6 +138,8 @@ public:
   std::ofstream NISradar_file_;
   std::ofstream NISlidar_file_;
 
+	int epoch_counter_;
+
 };
 
 #endif /* UKF_H */
