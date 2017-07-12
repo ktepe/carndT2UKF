@@ -46,11 +46,11 @@ UKF::UKF() {
   Hint: one or more values initialized above might be wildly off...  */
   is_initialized_=false; 
   
-  P_ << 1, 0, 0, 0, 0,
-  			0, 1, 0, 0, 0,
-  			0, 0, 1, 0, 0,
-  			0, 0, 0, 1, 0,
-  			0, 0, 0, 0, 1;
+  P_ << 0.5, 0, 0, 0, 0,
+  			0, 0.5, 0, 0, 0,
+  			0, 0, 10, 0, 0,
+  			0, 0, 0, 10, 0,
+  			0, 0, 0, 0, 0.5;
   
   n_x_=5;
   n_aug_=7;
