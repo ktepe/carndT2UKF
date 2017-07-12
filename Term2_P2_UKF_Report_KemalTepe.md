@@ -154,24 +154,24 @@ void UKF::UpdateState(VectorXd &z, VectorXd &z_pred, MatrixXd &S, MatrixXd &Zsig
 Performance of the UKF was measured using RMSE values of x and y positions as well as velocities in x and y directions. Another parameter which is important to observe Normalized Innovation Squared (NIS) values for Lidar and Radar. These two are provided below.
 
 ![alt text](./Doc/NISLidar.jpg) *NIS of Lidar, the values are consistenly below 5.9.*
-![alt text](./Doc/NISr05_10.jpg) *NIS of radar, the values are consistenly below 7.8, except at for the first few epoch (P_diagonal=[1 1 10 10 1].*
+![alt text](./Doc/NISRadar.jpg) *NIS of Radar, the values are consistenly below 7.8.* (P_diagonal=[0.5 0.5 10 10 0.5].*
 ![alt text](./Doc/NISr05_10_P.jpg) *NIS of radar, the values are consistenly below 5.9, P initial has changed (P_diagonal=[0.5 0.5 10 10 1], the NIS values in the beginning are relatively more consistent than previous figure.*
 
 Process covariance values also plays an important role in the performance of UKF. I changed these to reduce the error as well as get consistent NIS values.
 
-*Table: for standard variances for acceleration and yaw change during the  different parameters*
+*Table: for standard variances for acceleration and yaw change during the  different parameters for Radar only UKF*
 
 
 | Parameters | | | | | | | 
 | :------------- |-------------:| -----:|-----:|------:|------:|------:|
-| Std_a         | 0.5 	| 0.5 	| 0.5 	| 1.0 	| 1.0 | 2.0 |
-| Std_yawdd     | 0.5 	| 1.0 	| 2.0 	| 0.5 	| 2.0 | 2.0 |
-| RMSE x |  0.0636     |   0.0612 | 0.0628 | 0.0669 | 0.0707 | 0.079 |
-| RMSE y |  0.1083     |   0.1087 | 0.1126 | 0.1027 |  0.1123 | 0.1108 |
-| RMSE Vx |  0.3776   |   0.3823 |  0.4002 | 0.3812 | 0.4083 | 0.4137 |
-| RMSE Vy |  0.2487     |    0.2514 | 0.3129 | 0.2221 | 0.3066 | 0.3009 |
+| Std_a         | 0.5 	| 1.0 	| 1.5 	| 2.0 	| 1.0 | 1.0 | 
+| Std_yawdd     | 1.0 	| 1.0 	| 1.0 	| 1.0 	| 0.5 | 1.5 |
+| RMSE x |  0.1568    |   0.1521 | 0.1570 | 0.1629 | 0.1511 | 0.1532 |
+| RMSE y |  0.2106     |   0.2160 | 0.2262 | 0.2353 |  0.2057 | 0.2194 |
+| RMSE Vx |  0.3673   |   0.3575 |  0.3636 | 0.3761 | 0.3606 | 0.3651 |
+| RMSE Vy |  0.3297     |    0.3150 | 0.3264 | 0.3364 | 0.3158 | 0.3304 |
 
-Std_a=1.0, and Std_yawdd=0.5 seem to be a good comprimise among different valuesto use from this table
+Std_a=1.0, and Std_yawdd=1.0 seem to be a good comprimise among different valuesto use from this table
 
 
 ### 3. Results and Future Enhancements
@@ -186,9 +186,9 @@ Sensor fusion significantly reduce the estimation errors as evidenced by the fol
 
 |RMSE Metric| Only Lidar | Only Radar | Both Lidar and Ridar |
 |----|----|-----|-----|
-|RMSE x | 0.0947 |0.2175 | 0.0707 |
-|RMSE y | 0.0963 | 0.2577 | 0.1023 |
-|RMSE Vx | 0.4631 |0.4143 | 0.3655 |
-|RMSE Vy | 0.2289 |0.3608 | 0.2196 |
+|RMSE x | 0.1022 |0.2175 | 0.0642 |
+|RMSE y | 0.0981 | 0.2577 | 0.0827 |
+|RMSE Vx | 0.6090 |0.4143 | 0.3262 |
+|RMSE Vy | 0.2573 |0.3608 | 0.1865 |
 
 
