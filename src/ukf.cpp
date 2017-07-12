@@ -163,11 +163,11 @@ void UKF::ProcessMeasurement(const MeasurementPackage &meas_package) {
   //negative time confuses sigma predictions for reruns.
   if (delta_t < 0){
   	is_initialized_ = false;
- 		P_ << 1, 0, 0, 0, 0,
-  				0, 1, 0, 0, 0,
-  				0, 0, 1, 0, 0,
-  				0, 0, 0, 1, 0,
-  				0, 0, 0, 0, 1;
+ 		P_ << 0.5, 0, 0, 0, 0,
+  			0, 0.5, 0, 0, 0,
+  			0, 0, 10, 0, 0,
+  			0, 0, 0, 10, 0,
+  			0, 0, 0, 0, 0.5;
   				
 	  return;
   }
