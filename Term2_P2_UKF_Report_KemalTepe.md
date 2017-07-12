@@ -155,7 +155,6 @@ Performance of the UKF was measured using RMSE values of x and y positions as we
 
 ![alt text](./Doc/NISLidar.jpg) *NIS of Lidar, the values are consistenly below 5.9.*
 ![alt text](./Doc/NISRadar.jpg) *NIS of Radar, the values are consistenly below 7.8.* (P_diagonal=[0.5 0.5 10 10 0.5].*
-![alt text](./Doc/NISr05_10_P.jpg) *NIS of radar, the values are consistenly below 5.9, P initial has changed (P_diagonal=[0.5 0.5 10 10 1], the NIS values in the beginning are relatively more consistent than previous figure.*
 
 Process covariance values also plays an important role in the performance of UKF. I changed these to reduce the error as well as get consistent NIS values.
 
